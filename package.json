@@ -4,12 +4,13 @@
   "description": "express.js bulletin board practice",
   "main": "index.js",
   "scripts": {
-    "start": "",
+    "start": "ts-node src/www.ts",
+    "dev": "nodemon",
     "build": "npm run build:ts",
     "serve": "node dist/www.js",
     "test": "",
     "build:ts": "tsc",
-    "postinstall": "npm run build && npm run serve"
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,9 @@
     "@types/node": "^9.4.6",
     "express": "^4.16.2",
     "mysql": "^2.15.0",
+    "nodemon": "^1.17.1",
     "pug": "^2.0.0-rc.4",
+    "ts-node": "^5.0.1",
     "typescript": "^2.7.2"
   },
   "devDependencies": {

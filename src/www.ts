@@ -5,7 +5,7 @@ const port = app.get('port');
 
 const server = app.listen(port, () => {
    console.log(
-       `App is running on port ${port} in ${app.get('env')}`
+       `App is running on port:${port} in ${app.get('env')}`
    );
 });
 
