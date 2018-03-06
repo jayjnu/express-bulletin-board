@@ -8,7 +8,8 @@
     "build": "npm run build:ts",
     "serve": "node dist/www.js",
     "test": "",
-    "build:ts": "tsc"
+    "build:ts": "tsc",
+    "postinstall": "npm run build && npm run serve"
   },
   "repository": {
     "type": "git",
