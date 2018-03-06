@@ -62,4 +62,4 @@ typings/
 *.iml
 
 # project specific
-dist/**/*
+dist
