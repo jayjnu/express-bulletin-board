@@ -1,0 +1,11 @@
+extends layout
+
+block contents
+    h2.title-login Login
+    div.wrap-form
+        form.form-login
+            fieldset user information
+            label.label-input-id(for="userId")
+            input#userId(type="text" value="" name="userId" placeholder="Enter user ID")
+            label.label-input-pass(for="userPass")
+            input#userPass(type="text" value="" name="userPass" placeholder="Enter Password")
