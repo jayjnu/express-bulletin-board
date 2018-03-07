@@ -1,11 +1,12 @@
 import express from 'express';
 import path from 'path';
-import Users from './users';
 import url from 'url';
 import mysql from 'mysql';
+
+import Users from './users';
 import BBS from './bbs';
 
-const dbURL = url.parse(process.env.CLEARDB_DATABASE_URL);
+const dbURL = url.parse(process.env.CLEARDB_DATABASE_URL || 'mysql://b0243dec43939d:d426bd41@us-cdbr-iron-east-05.cleardb.net/heroku_11996cfd6dc1166?reconnect=true');
 const dbPool = mysql.createPool({
     connectionLimit : 10,
     host: dbURL.host,
@@ -20,9 +21,10 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-app.use('/login', Users.Controllers({ dbPool }));
+app.use('/users', Users.Controllers({ dbPool }));
 app.use('/bbs', BBS.Controllers({ dataSource: dbPool }));
 app.get('/', (req, res) => {
    res.render('home', { title: 'Home' });

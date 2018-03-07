@@ -3,7 +3,8 @@ import { Pool } from 'mysql';
 
 type DataAccessOption = {
     dbPool: Pool
-}
+};
+
 class DataAccess {
     dbPool: Pool;
     constructor({ dbPool }: DataAccessOption) {
@@ -11,7 +12,15 @@ class DataAccess {
     }
 
     async query(query: string) {
-        return await this.dbPool.query(query);
+        return new Promise((resolve, reject) => {
+            this.dbPool.query(query, (err, data, fields) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve( { data, fields } );
+                }
+            });
+        });
     }
 
     async getUsers({limit = 50}: { limit: number }) {
@@ -25,7 +34,6 @@ class DataAccess {
     }
 
     async postUser() {
-        
     }
 }
 

@@ -1,6 +1,6 @@
 type DataAccessOption = {
     dataSource: any
-}
+};
 
 class DataAccess {
     private dataSource: any;

@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import Service from './service'
+import Service from './service';
 
 type ControllerOption = {
     dataSource: any
@@ -51,4 +51,4 @@ function Controllers({ dataSource }: ControllerOption) {
     return router;
 }
 
-export default Controllers
+export default Controllers;

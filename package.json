@@ -1,6 +1,6 @@
 {
   "name": "express-bulletin-board",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "express.js bulletin board practice",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
     "@types/express": "^4.11.1",
     "@types/node": "^9.4.6",
     "@types/passport": "^0.4.3",
+    "config": "^1.30.0",
     "express": "^4.16.2",
     "jest": "^22.4.2",
     "mysql": "^2.15.0",

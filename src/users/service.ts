@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import {Pool} from "mysql";
+import { Pool } from 'mysql';
 import DataAccess from './data-access';
 
 type ServiceOption = {

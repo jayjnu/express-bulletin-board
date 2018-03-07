@@ -1,9 +1,9 @@
 extends layout
 
 block content
-    h2.title-login Login
+    h2.title-login Signup
     div.wrap-form
-        form.form-login(action="/users/login" method="post")
+        form.form-login(action="/signup" method="post")
             fieldset user information
             label.label-input-id(for="userId")
             input#userId(type="text" value="" name="userId" placeholder="Enter user ID")

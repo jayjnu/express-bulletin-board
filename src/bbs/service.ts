@@ -1,4 +1,4 @@
-import DataAccess from "./data-access";
+import DataAccess from './data-access';
 
 type ServiceOption = {
     dataSource: any
