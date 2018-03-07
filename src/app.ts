@@ -6,7 +6,7 @@ import mysql from 'mysql';
 import Users from './users';
 import BBS from './bbs';
 
-const dbURL = url.parse(process.env.CLEARDB_DATABASE_URL || 'mysql://b0243dec43939d:d426bd41@us-cdbr-iron-east-05.cleardb.net/heroku_11996cfd6dc1166?reconnect=true');
+const dbURL = url.parse(process.env.CLEARDB_DATABASE_URL);
 const dbPool = mysql.createPool({
     connectionLimit : 10,
     host: dbURL.host,
