@@ -3,10 +3,13 @@ extends layout
 block content
     h2.title-login Login
     div.wrap-form
-        form.form-login(action="/users/login" method="post")
+        form.form-login(action="/users" method="post")
             fieldset user information
-            label.label-input-id(for="userId")
-            input#userId(type="text" value="" name="userId" placeholder="Enter user ID")
-            label.label-input-pass(for="userPass")
-            input#userPass(type="password" value="" name="userPass" placeholder="Enter Password")
-            input(type="submit" value="login")
+                div
+                    label.label-input-id(for="userId")
+                    input#userId(type="text" value="" name="userId" placeholder="Enter user ID")
+                div
+                    label.label-input-pass(for="userPass")
+                    input#userPass(type="password" value="" name="userPass" placeholder="Enter Password")
+                div
+                    input(type="submit" value="login")

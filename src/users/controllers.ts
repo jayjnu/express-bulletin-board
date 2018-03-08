@@ -1,25 +1,25 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import Service from './service';
-import { Pool } from 'mysql';
+import {Pool} from 'mysql';
 
 type ControllerOption = {
     dbPool: Pool
 };
 
-export default function Controllers({ dbPool }: ControllerOption) {
+export default function Controllers({dbPool}: ControllerOption) {
 
     const router = Router();
-    const service = new Service({ dbPool });
+    const service = new Service({dbPool});
 
     router.get('/', (req, res) => {
         res.render('login');
     });
 
-    router.get('/signup', (req, res) => {
-        res.render('signup');
+    router.get('/:userId', (req, res) => {
+        res.render('user-info', {userName: req.params.userId});
     });
 
-    router.post('/login', async (req, res) => {
+    router.post('/', async (req, res) => {
         const userLoginQuery = {
             userId: req.body.userId,
             userPass: req.body.userPass
@@ -30,8 +30,25 @@ export default function Controllers({ dbPool }: ControllerOption) {
             const data = await service.userLogin(userLoginQuery);
             res.status(200).send(data);
         } catch (e) {
-            res.redirect('/users/signup');
+            res.redirect('/signup');
         }
+    });
+
+    router.post('/', async (req, res) => {
+
+    });
+
+    router.put('/:userId', (req, res) => {
+        const params = req.body;
+        service.updateUserData({userId: params.userId, userPass: params.userPass, email: params.email})
+            .then(
+                (result) => {
+                    res.send(result);
+                },
+                (reason) => {
+                    res.send(reason);
+                }
+            );
     });
 
     return router;

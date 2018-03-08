@@ -1,8 +1,13 @@
-import url from 'url';
 import { Pool } from 'mysql';
 
 type DataAccessOption = {
     dbPool: Pool
+};
+
+type UpdateQuery = {
+    userId: string
+    userPass: string
+    email: string
 };
 
 class DataAccess {
@@ -11,7 +16,7 @@ class DataAccess {
         this.dbPool = dbPool;
     }
 
-    async query(query: string) {
+    query(query: string) {
         return new Promise((resolve, reject) => {
             this.dbPool.query(query, (err, data, fields) => {
                 if (err) {
@@ -29,11 +34,20 @@ class DataAccess {
     }
 
     async getUserByUserId(userId: string|number) {
-        const query = `SELECT * FROM users WHERE userid = '${userId}'`;
+        const query = `SELECT * FROM users WHERE userId=${userId}`;
         return await this.query(query);
     }
 
-    async postUser() {
+    async updateUserData({ userId, userPass, email }: UpdateQuery) {
+        const dataBeforeUpdate = await this.getUserByUserId(userId);
+        const newData = Object.assign({}, dataBeforeUpdate, {
+            userPass,
+            email
+        });
+        const query = `UPDATE users 
+                      SET userPass=${newData.userPass} email=${newData.email} 
+                      WHERE userId=${userId}`;
+        return await this.query(query);
     }
 }
 
