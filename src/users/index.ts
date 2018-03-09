@@ -1,7 +1,7 @@
-import Controllers from './controllers';
+import * as middleware from './middleware';
 
 const Users = {
-    Controllers
+    middleware
 };
 
 export default Users;
