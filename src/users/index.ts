@@ -1,7 +1,7 @@
-import * as middleware from './middleware';
+import { userProfile } from './user-profile';
+import { userRegister } from './user-register';
 
-const Users = {
-    middleware
+export {
+  userRegister,
+  userProfile
 };
-
-export default Users;

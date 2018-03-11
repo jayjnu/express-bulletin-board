@@ -4,14 +4,23 @@ block content
     h2.title-login Signup
     div.wrap-form
         form.form-login(action="/users" method="post")
-            fieldset user information
+            fieldset User information
                 div
-                    label.label-input-id(for="userId")
+                    label.label-input(for="userId") ID
                     input#userId(type="text" value="" name="userId" placeholder="Enter user ID")
                 div
-                    label.label-input-pass(for="userPass")
+                    label.label-input(for="firstName") Name
+                    input#firstName(type="text" name="firstName" value="" placeholder="First name")
+                    label.label-input
+                        input#lastName(type="text" name="lastName" value="" placeholder="Last name")
+                div
+                    label.label-input(for="userPass") Password
                     input#userPass(type="password" value="" name="userPass" placeholder="Enter Password")
                 div
-                    label.label-input-passcheck(for="userPassCheck")
+                    label.label-input(for="userPassCheck") Check Password
                     input#userPassCheck(type="password" value="" name="userPassCheck" placeholder="Enter Password Again")
+                div
+                    label.label-input(for="userEmail") Email
+                    input#userEmail(type="email" value="" name="email" placeholder="email")
+
                 input(type="submit" value="login")

@@ -8,9 +8,10 @@
     "dev": "nodemon",
     "build": "npm run build:ts",
     "serve": "node dist/www.js",
-    "test": "",
+    "test": "jest",
     "build:ts": "tsc",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -22,23 +23,47 @@
     "url": "https://github.com/jayjnu/express-bulletin-board/issues"
   },
   "homepage": "https://github.com/jayjnu/express-bulletin-board#readme",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "dependencies": {
-    "@types/express": "^4.11.1",
-    "@types/morgan": "^1.7.35",
-    "@types/node": "^9.4.6",
-    "@types/passport": "^0.4.3",
     "config": "^1.30.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
-    "jest": "^22.4.2",
+    "express-session": "^1.15.6",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
-    "nodemon": "^1.17.1",
     "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.4",
-    "ts-node": "^5.0.1",
-    "typescript": "^2.7.2"
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
-    "@types/mysql": "^2.15.2"
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.11.1",
+    "@types/express-session": "^1.15.8",
+    "@types/jest": "^22.2.0",
+    "@types/morgan": "^1.7.35",
+    "@types/mysql": "^2.15.2",
+    "@types/node": "^9.4.7",
+    "@types/passport": "^0.4.3",
+    "@types/passport-local": "^1.0.32",
+    "@types/supertest": "^2.0.4",
+    "jest": "^22.4.2",
+    "nodemon": "^1.17.1",
+    "ts-jest": "^22.4.1",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2"
   }
 }

@@ -1,4 +1,7 @@
 extends layout
 
 block content
-    h1 #{userName}'s Profile
+    if userData[0]
+        h1 #{userData[0].user_id}'s Profile
+    else
+        h1 User doesn't exist

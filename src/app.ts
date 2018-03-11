@@ -1,51 +1,43 @@
+// import modules
 import express from 'express';
+// import utils
 import path from 'path';
 import url from 'url';
-import mysql from 'mysql';
+// import middleware
 import morgan from 'morgan';
-
-import db from './db';
-
-import Users from './users';
-import {UserProfileReq} from "./users/middleware/user-profile";
-
-const dbURL = url.parse(process.env.CLEARDB_DATABASE_URL);
-const dbPool = db.MySQLPool(mysql.createPool({
-    connectionLimit : 10,
-    host: dbURL.host,
-    user: dbURL.auth.split(':')[0],
-    password: dbURL.auth.split(':')[1],
-    database: dbURL.pathname.slice(1)
-}));
+import db from './mysql-middleware';
+import * as routes from './routes';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from 'passport';
+import { localStrategy } from './auth';
+import config from './config';
+import {IStrategyOptionsWithRequest} from 'passport-local'
 
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.resolve('views'));
 app.set('view engine', 'pug');
 
+// Middleware Settings
+passport.use(localStrategy(config.passport.strategies.local as IStrategyOptionsWithRequest));
+app.use(db.MySQLPool(config.DB_CONFIG));
 app.use(morgan('combined'));
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
+app.use(session(config.session));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/assets', express.static(path.join(__dirname, 'public')));
-app.get('/', (req, res) => {
-   res.render('home', { title: 'Home' });
-});
-app.get('/users/:userId', dbPool, Users.middleware.userProfile, (req: UserProfileReq, res) => {
-    res.render('user-info', { userName: req.users.userName });
-});
-app.post('/users', dbPool, Users.middleware.userRegister, (req, res) => {
-    res.redirect('/');
-});
-app.get('/signup', (req, res) => {
-   res.render('signup');
-});
-app.get('/login', (req, res) => {
-   res.render('login');
-});
-app.get('*', (req, res) => {
-   res.status(404).render('not-found');
-});
+
+// Routing
+app.use('/', routes.home);
+app.use('/users', routes.users);
+app.use('/signup', routes.signup);
+app.use('/login', routes.login);
+app.use('/posts', routes.posts);
+app.use('*', routes.notFound);
 
 export default app;
