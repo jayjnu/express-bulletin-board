@@ -1,6 +1,6 @@
 import { IStrategyOptionsWithRequest, Strategy as LocalStrategy } from 'passport-local';
 import * as Users from '../users';
-import {DBReq} from '../mysql-middleware/interfaces';
+import { DBReq } from '../mysql-middleware/interfaces';
 
 export const localStrategy = (options: IStrategyOptionsWithRequest) => {
   return new LocalStrategy(options, (req: DBReq, username, password, done) => {

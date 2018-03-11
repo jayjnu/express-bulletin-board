@@ -12,7 +12,7 @@ import session from 'express-session';
 import passport from 'passport';
 import { localStrategy } from './auth';
 import config from './config';
-import {IStrategyOptionsWithRequest} from 'passport-local'
+import { IStrategyOptionsWithRequest } from 'passport-local';
 
 const app = express();
 
